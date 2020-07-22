@@ -8,11 +8,11 @@ yarn add @react-navigation/native
 
 expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
 
-npm install @react-navigation/stack
+ yarn add @react-navigation/stack
 
-npm i react-native-elements
+yarn add react-native-elements
 
-npm i react-native-dropdown-picker
+yarn add react-native-dropdown-picker
 
 ```
 
