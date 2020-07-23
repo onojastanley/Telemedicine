@@ -4,8 +4,12 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { Button, Card, Input, Avatar} from 'react-native-elements';
 import DropDownPicker from 'react-native-dropdown-picker';
+import { Ionicons } from '@expo/vector-icons';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import IoniconsIcon from "react-native-vector-icons/Ionicons";
 import EntypoIcon from "react-native-vector-icons/Entypo";
+import MaterialIconsIcon from "react-native-vector-icons/MaterialIcons";
 function HomeScreen({ navigation }) {
   return (
 <View style={styles.container}>
@@ -137,31 +141,89 @@ function PatientsRegisterScreen({ navigation }) {
   );
 }
 
+function DoctorBookingScreen({ navigation }) {
+
+  return (
+      <View style={styles.container4}>
+
+  <Text style={styles.tname}> Book here</Text>
+ </View>
+  );
+}
 function DoctorProfileScreen({ navigation }) {
 
   return (
       <View style={styles.container4}>
-<Avatar 
+
+    <View style={styles.card}>
+  <Avatar 
 rounded  
-size="large"
+size="xlarge"
+avatarStyle={styles.avatar}
   title="BP"
   onPress={() => console.log("Works!")}
-  source={require('./assets/avatar.png')} />
-  <Text style={styles.tname}> Firstname Lastname</Text>
-   
+  source={require('./assets/profile.jpg')} />
+  
+ <Text style={styles.tname}> Dr. Onoja Stanley</Text>
   <Text style={styles.tspecialization}>  <EntypoIcon
               name="awareness-ribbon"
               style={styles.icon}
-            ></EntypoIcon> Specialization</Text>
-  <Text style={styles.tlocation}> <EntypoIcon name="location-pin" style={styles.icon}></EntypoIcon>Location</Text>
+            ></EntypoIcon> Cardiology</Text>
+			 <Text style={styles.tlocation}> <EntypoIcon name="location-pin" style={styles.icon}></EntypoIcon>Enugu</Text>
+			
   
-   <Text style={styles.description}>DESCRIPTION</Text>
-       
+  <Button
+    buttonStyle={styles.button2}
+  
+    title={<Text style={styles.fee}>CONSULTATION FEE: N5000</Text>}/>
+</View> 
+<View style={styles.buttongroup}>
+<Button
+  icon={
+    <IoniconsIcon
+            name="md-chatbubbles"
+            style={styles.icon16}
+          ></IoniconsIcon>
+  }
+  buttonStyle={styles.button3}
+  
+/>
+<Button
+  icon={
+   <IoniconsIcon name="ios-call" style={styles.icon16}></IoniconsIcon>
+  }
+  buttonStyle={styles.button3}
+
+/>
+<Button
+  icon={
+   <MaterialIconsIcon
+            name="videocam"
+            style={styles.icon16}
+          ></MaterialIconsIcon>
+  }
+  buttonStyle={styles.button3}
+  
+/>
+</View>
+<Card title="DESCRIPTION">
+
+          <Text>Biopsy: FNAC first to establish diagnosis. There may be a false +ve/-ve. Open wide excision or trucut biopsy for paraffin section histology core biopsy with sonographic guidance, mammography or ultrasonograhic guidance as an alternative to excision biopsy. Excisional
+biopsy for a lump 3mm, incisional biopsy for a lump that is too big
+</Text>
+      
+</Card>
+<Card title="DESCRIPTION2">
+
+          <Text>Biopsy: FNAC first to establish diagnosis. There may be a false +ve/-ve. Open wide excision or trucut biopsy for paraffin section histology core biopsy with sonographic guidance, mammography or ultrasonograhic guidance as an alternative to excision biopsy. Excisional
+biopsy for a lump 3mm, incisional biopsy for a lump that is too big
+</Text>
+      
+</Card>
   
     </View>
   );
 }
-
 function PatientProfileScreen({ navigation }) {
 const [selectedValue, setSelectedValue] = useState("java");	
   return (
@@ -597,6 +659,38 @@ function PharmacistsRegisterScreen({ navigation }) {
   );
 }
 
+const Tab = createBottomTabNavigator();
+
+function DoctorTab() {
+  return (
+   
+    <Tab.Navigator >
+     <Tab.Screen name="dprofile" component={DoctorProfileScreen} /> 
+      <Tab.Screen name="Booking" component={DoctorBookingScreen} />
+      
+    </Tab.Navigator>
+	
+  );
+}
+function PatientTab() {
+  return (
+    <Tab.Navigator >
+     <Tab.Screen name="dprofile" component={DoctorProfileScreen} /> 
+      <Tab.Screen name="Booking" component={DoctorBookingScreen} />
+      
+    </Tab.Navigator>
+  );
+}
+function PharmacistTab() {
+  return (
+    <Tab.Navigator>
+     <Tab.Screen name="dprofile" component={DoctorProfileScreen} /> 
+      <Tab.Screen name="Booking" component={DoctorBookingScreen} />
+      
+    </Tab.Navigator>
+  );
+}
+
 const Stack = createStackNavigator();
 
 function App() {
@@ -606,7 +700,7 @@ function App() {
         <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'My home', headerShown: false}}/>
 		
 	<Stack.Screen name="PatientsRegister" component={PatientsRegisterScreen} options={{ title: 'Patient Registration', headerStyle: {backgroundColor: '#2089DC',}, headerTintColor: '#fff', headerTitleStyle: { fontWeight: 'bold',
-          },
+          }, 
         }}
       />
 <Stack.Screen name="DoctorsRegister" component={DoctorsRegisterScreen} options={{ title: 'Doctor Registration', headerStyle: {backgroundColor: '#2089DC',}, headerTintColor: '#fff', headerTitleStyle: { fontWeight: 'bold',
@@ -622,15 +716,15 @@ function App() {
           },
         }}
       />
-<Stack.Screen name="pprofile" component={PatientProfileScreen} options={{ title: 'Profile', headerStyle: {backgroundColor: '#2089DC',}, headerTintColor: '#fff', headerTitleStyle: { fontWeight: 'bold',
+<Stack.Screen name="pprofile" component={PatientTab} options={{ title: 'Profile', headerStyle: {backgroundColor: '#2089DC',}, headerTintColor: '#fff', headerTitleStyle: { fontWeight: 'bold',
           },
         }}
       />
-<Stack.Screen name="dprofile" component={DoctorProfileScreen} options={{ title: 'Profile', headerStyle: {backgroundColor: '#2089DC',}, headerTintColor: '#fff', headerTitleStyle: { fontWeight: 'bold',
-          },
+<Stack.Screen name="dprofile" component={DoctorTab} options={{ title: 'Profile', headerStyle: {backgroundColor: '#2089DC',}, headerTintColor: '#fff',  headerTitleStyle: { fontWeight: 'bold',
+          }, 
         }}
       />
-<Stack.Screen name="phprofile" component={PharmacistProfileScreen} options={{ title: 'Profile', headerStyle: {backgroundColor: '#2089DC',}, headerTintColor: '#fff', headerTitleStyle: { fontWeight: 'bold',
+<Stack.Screen name="phprofile" component={PharmacistTab} options={{ title: 'Profile', headerStyle: {backgroundColor: '#2089DC',}, headerTintColor: '#fff', headerTitleStyle: { fontWeight: 'bold',
           },
         }}
       />
@@ -682,33 +776,63 @@ const styles = StyleSheet.create({
   },
   container4: {
 	 
-	 flexDirection: 'row',
-    flexWrap: 'wrap',
-	 alignSelf: 'flex-start',
-    backgroundColor: 'F2F2F2',
-   margin: 24,
+	 justifyContent: 'center',
+	alignItems: 'center',
+	
+	backgroundColor: '#F2F2F2',
+    
 	
   },
+  fee: {
+	 
+	
+	fontFamily: 'lucida grande',
+    fontWeight: 'bold',
+   color: '#2089DC',
+    
+	
+  },
+  buttongroup: {
+	 flex: 1,
+    backgroundColor: '#FFFFFF',
+    justifyContent: 'center',
+	alignItems: 'center',
+	flexDirection: "row",
+	
+	
+  },
+    card: {
+	borderBottomRightRadius: 100,
+	borderBottomLeftRadius: 100,
+	    flex: 1,
+    backgroundColor: '#2089DC',
+    justifyContent: 'center',
+	alignItems: 'center',
+	alignSelf: ' Stretch',
+	padding: 24,
+	margin: 0,
+	borderColor: '#2089DC',
+  },
     tname: {
-	margin: 3,
+	
    fontSize: 20,
     fontFamily: 'lucida grande',
     fontWeight: 'bold',
-    alignSelf: 'flex-start',
+    
   }, 
    tlocation: {
-	   margin: 3,
+	   
     fontSize: 20,
     fontFamily: 'lucida grande',
     fontWeight: 'bold',
-    alignSelf: 'flex-start',
+    
   },
    tspecialization: {
-margin: 3,
+
     fontSize: 20,
     fontFamily: 'lucida grande',
     fontWeight: 'bold',
-    alignSelf: 'flex-start',
+   
   },
   heading: {
     margin: 24,
@@ -723,6 +847,15 @@ margin: 3,
     marginTop: 30,
     
     
+  },
+  button2: {
+	  fontColor: '#2089DC',
+	  backgroundColor : 'white',
+  },
+  
+  button3: {
+	margin: 30,
+	width: 70,
   },
    select: {
    
@@ -760,6 +893,17 @@ margin: 3,
   text: {
       color: '#2089DC',
 	  fontWeight: 'bold',
-   }
+   },
+   avatar: {
+	    
+   
+    justifyContent: 'center',
+	alignItems: 'center',
+	margin: 0,
+  },
+  icon16: {
+    color: "rgba(254,249,249,1)",
+    fontSize: 30
+  },
 });
 
